@@ -80,7 +80,7 @@ void VTKtoPCL(vtkPolyData* const polydata, CloudT& cloud)
     for (size_t i = 0; i < cloud.points.size (); ++i)
       {
       float normal[3];
-      normals->GetTupleValue(i,normal);
+      normals->GetTypedTuple(i,normal);
       typename CloudT::PointType p = cloud.points[i];
       pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, float> (p, "normal_x", normal[0]));
       pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, float> (p, "normal_y", normal[1]));
@@ -106,7 +106,7 @@ void VTKtoPCL(vtkPolyData* const polydata, CloudT& cloud)
     for (size_t i = 0; i < cloud.points.size (); ++i)
       {
       unsigned char color[3];
-      colors->GetTupleValue(i,color);
+      colors->GetTypedTuple(i,color);
       typename CloudT::PointType p = cloud.points[i];
       pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, unsigned char> (p, "r", color[0]));
       pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, unsigned char> (p, "g", color[1]));
@@ -186,7 +186,7 @@ void VTKtoPCL(vtkStructuredGrid* const structuredGrid, CloudT& cloud)
         float normal[3];
         if(structuredGrid->IsPointVisible(pointId))
         {
-          normals->GetTupleValue(i,normal);
+          normals->GetTypedTuple(i,normal);
           typename CloudT::PointType p = cloud(i, j);
           pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, float> (p, "normal_x", normal[0]));
           pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, float> (p, "normal_y", normal[1]));
@@ -223,7 +223,7 @@ void VTKtoPCL(vtkStructuredGrid* const structuredGrid, CloudT& cloud)
         unsigned char color[3];
         if(structuredGrid->IsPointVisible(pointId))
         {
-          colors->GetTupleValue(i,color);
+          colors->GetTypedTuple(i,color);
           typename CloudT::PointType p = cloud(i, j);
           pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, float> (p, "r", color[0]));
           pcl::for_each_type<FieldList> (pcl::SetIfFieldExists<typename CloudT::PointType, float> (p, "g", color[1]));

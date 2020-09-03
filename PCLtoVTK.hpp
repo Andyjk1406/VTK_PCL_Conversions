@@ -57,7 +57,7 @@ void PCLtoVTK(const CloudT& cloud, vtkPolyData* const pdata)
       pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, float> (p, "y_normal", has_normal_y, normal_y_val));
       pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, float> (p, "z_normal", has_normal_z, normal_z_val));
       float normal[3] = {normal_x_val, normal_y_val, normal_z_val};
-      normals->SetTupleValue(i, normal);
+      normals->SetTypedTuple(i, normal);
       }
     tempPolyData->GetPointData()->SetNormals(normals);
   }
@@ -82,7 +82,7 @@ void PCLtoVTK(const CloudT& cloud, vtkPolyData* const pdata)
       pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, unsigned char> (p, "g", has_g, g_val));
       pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, unsigned char> (p, "b", has_b, b_val));
       unsigned char color[3] = {r_val, g_val, b_val};
-      colors->SetTupleValue(i, color);
+      colors->SetTypedTuple(i, color);
       }
     tempPolyData->GetPointData()->SetScalars(colors);
   }
@@ -161,7 +161,7 @@ void PCLtoVTK(const CloudT& cloud, vtkStructuredGrid* const structuredGrid)
           pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, float> (p, "y_normal", has_normal_y, normal_y_val));
           pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, float> (p, "z_normal", has_normal_z, normal_z_val));
           float normal[3] = {normal_x_val, normal_y_val, normal_z_val};
-          normals->SetTupleValue(pointId, normal);
+          normals->SetTypedTuple(pointId, normal);
         }
         else
         {
@@ -200,7 +200,7 @@ void PCLtoVTK(const CloudT& cloud, vtkStructuredGrid* const structuredGrid)
           pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, unsigned char> (p, "g", has_g, g_val));
           pcl::for_each_type<FieldList> (pcl::CopyIfFieldExists<typename CloudT::PointType, unsigned char> (p, "b", has_b, b_val));
           unsigned char color[3] = {r_val, g_val, b_val};
-          colors->SetTupleValue(i, color);
+          colors->SetTypedTuple(i, color);
         }
         else
         {
